@@ -1,0 +1,12 @@
+"""生产模式配置文件"""
+
+DB_DIALCT = "mysql"
+DB_DRITVER = "pymysql"
+DB_HOST = "127.0.0.1"
+DB_PORT = "3306"
+DB_USERNAME = "root"
+DB_PASSWORD = "root"
+DB_NAME = "modelcase_backend"
+
+SQLALCHEMY_DATABASE_URI = f"{DB_DIALCT}+{DB_DRITVER}://{DB_USERNAME}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}?charset=utf8"
+SQLALCHEMY_TRACK_MODIFICATIONS = True

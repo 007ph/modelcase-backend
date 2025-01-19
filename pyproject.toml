@@ -1,0 +1,17 @@
+[project]
+name = "flask-template"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "cryptography>=44.0.0",
+    "flask>=3.1.0",
+    "flask-cors>=5.0.0",
+    "flask-sqlalchemy>=3.1.1",
+    "pyinstaller>=6.11.1",
+    "pymysql>=1.1.1",
+    "python-dotenv>=1.0.1",
+    "sqlalchemy-serializer>=1.4.22",
+    "waitress>=3.0.2",
+]

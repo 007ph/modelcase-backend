@@ -1,0 +1,45 @@
+name: Release
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - 'v*'
+jobs:
+  release:
+    name: Release
+    runs-on: windows-latest
+    steps:
+
+    - name: Get the tag version
+      id: get_tag
+      run: echo "VERSION_NUM=${GITHUB_REF#refs/tags/v}" >> $GITHUB_ENV
+
+    - name: Install Python 3.12
+      uses: actions/setup-python@v4
+      with:
+        python-version: 3.12
+
+    - name: Update versionNum in version.txt
+      run: |
+        $VERSION_NUM = "${env:VERSION_NUM}"
+        $versionNumFormatted = $VERSION_NUM -replace '\.', ', '
+        $versionStringFormatted = $VERSION_NUM -replace ',', '.'
+          
+        # 替换文件中的内容
+        (Get-Content "version.txt") -replace "versionNum = .+", "versionNum = $versionNumFormatted" | Set-Content "version.txt"
+        (Get-Content "version.txt") -replace "versionString = .+", "versionString = $versionStringFormatted" | Set-Content "version.txt"
+        Get-Content "version.txt"
+          
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install uv
+    
+    - name: build
+      run: |
+        uv run pyinstaller .\build.spec
+    
+       
+    
+    
