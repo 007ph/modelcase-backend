@@ -67,4 +67,4 @@ vs_version_content = vs_version_content.replace("versionString", version_string)
 with open("version.txt", "w", encoding="utf-8") as file:
     file.write(vs_version_content)
 
-print("生成的版本信息已经写入到 generated_version.rc 文件中。")
+print("upodate version success")
