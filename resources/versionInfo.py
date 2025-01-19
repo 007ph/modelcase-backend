@@ -7,6 +7,10 @@ current_date = datetime.now().strftime("%Y%m%d")
 # print(version_num)
 version_string = sys.argv[1:][0]
 
+# 如果以refs/tags/ 开头，则去掉
+if version_string.startswith("refs/tags/"):
+    version_string = version_string[10:]
+
 version_num = version_string[1:].split(".") + [current_date]
 
 versionNum = (
