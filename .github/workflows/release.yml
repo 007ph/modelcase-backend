@@ -4,34 +4,34 @@ on:
     branches:
       - main
     tags:
-      - 'v*'
+      - "v*"
 jobs:
   release:
     name: Release
     runs-on: windows-latest
     steps:
+      - name: Check out Git repository
+        uses: actions/checkout@v3
 
-    - name: Get the tag version
-      id: get_tag
-      run: echo "VERSION_NUM=${GITHUB_REF#refs/tags/v}" >> $GITHUB_ENV
+      - name: Get the tag version
+        id: get_tag
+        run: echo "VERSION_NUM=${GITHUB_REF#refs/tags/v}" >> $GITHUB_ENV
 
-    - name: Install Python 3.12
-      uses: actions/setup-python@v4
-      with:
-        python-version: 3.12
+      - name: Install Python 3.12
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.12
 
-    - name: Update version.txt versionNum
-      run: |
-        python .\resources\versionInfo.py ${{ env.VERSION_NUM }}
+      - name: Update version.txt versionNum
+        run: |
+          python .\resources\versionInfo.py ${{ env.VERSION_NUM }}
 
-    - name: Build
-      run: |
-        python .\resources\build.py
-    
-    - name: Upload .exe files from dist
-      uses: actions/upload-artifact@v3
-      with:
-        path: dist/*.exe  # 匹配 dist 目录下所有 .exe 文件
-       
-    
-    
+      - name: Build
+        run: |
+          python .\resources\build.py
+
+      - name: Upload .exe files from dist
+        uses: actions/upload-artifact@v3
+        with:
+          path: dist/*.exe # 匹配 dist 目录下所有 .exe 文件
+
