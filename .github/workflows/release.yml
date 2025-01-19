@@ -20,20 +20,18 @@ jobs:
       with:
         python-version: 3.12
 
-    - name: Ensure version.txt exists and update versionNum
+    - name: Update version.txt versionNum
       run: |
-          $versionFilePath = "$PWD/version.txt"  # 使用仓库根目录的路径
-             
-          # 格式化版本号
-          $VERSION_NUM = "${env:VERSION_NUM}"
-          $versionNumFormatted = $VERSION_NUM -replace '\.', ', '
-          $versionStringFormatted = $VERSION_NUM -replace ',', '.'
-          
-          # 替换文件中的内容
-          (Get-Content $versionFilePath) -replace "versionNum = .+", "versionNum = $versionNumFormatted" | Set-Content $versionFilePath
-          (Get-Content $versionFilePath) -replace "versionString = .+", "versionString = $versionStringFormatted" | Set-Content $versionFilePath
-          Get-Content $versionFilePath
+        python .\resources\versionInfo.py ${ env.VERSION_NUM }}
+
+    - name: Build
+      run: |
+        python .\resources\build.py
     
+    - name: Upload .exe files from dist
+      uses: actions/upload-artifact@v3
+      with:
+        path: dist/*.exe  # 匹配 dist 目录下所有 .exe 文件
        
     
     
