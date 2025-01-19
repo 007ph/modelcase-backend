@@ -17,6 +17,10 @@ jobs:
         with:
           python-version: 3.12
 
+      - name: Install Python 3.12
+        run: |
+            pip install uv
+      
       - name: Update version.txt versionNum
         run: |
           python .\resources\versionInfo.py ${{ github.ref }}
