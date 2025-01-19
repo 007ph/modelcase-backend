@@ -5,26 +5,37 @@ from app.core.db import db
 from flask import Flask
 from app.core.redprint import register_redprints
 
-# 加载环境变量
 IS_DEBUG = os.environ.get("FLASK_ENV") == "development"
 
-
-def create_app():
+def create_app(db_config="config.local_secure"):
     """创建 Flask 应用"""
     app = Flask(__name__)
+    if IS_DEBUG:
+        app.config.from_object(db_config)
+        print("Running in development mode")
+    else:
+        app.config.from_pyfile(db_config)
+        print(
+            f"Running in production mode on {app.config.get('HOST')}:{app.config.get('PORT')}"
+        )
+    register_plugins(app)
+    return app
+
+
+def load_config(app: Flask, db_config_file):
+    """加载配置"""
 
     if IS_DEBUG:
         app.config.from_object("config.local_secure")
-        print("Running in development mode")
+        print(
+            f"Running in development mode on {app.config.get('HOST')}:{app.config.get('PORT')}"
+        )
     else:
-        app.config.from_object("config.secure")
-        print("Running in production mode")
-
+        app.config.from_pyfile(db_config_file)
+        print(
+            f"Running in production mode on {app.config.get('HOST')}:{app.config.get('PORT')}"
+        )
     app.config.from_object("config.setting")
-
-    register_plugins(app)
-
-    return app
 
 
 def register_plugins(app: Flask):

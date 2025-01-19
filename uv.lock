@@ -158,6 +158,7 @@ dependencies = [
     { name = "pymysql" },
     { name = "python-dotenv" },
     { name = "sqlalchemy-serializer" },
+    { name = "types-flask-cors" },
     { name = "waitress" },
 ]
 
@@ -171,6 +172,7 @@ requires-dist = [
     { name = "pymysql", specifier = ">=1.1.1" },
     { name = "python-dotenv", specifier = ">=1.0.1" },
     { name = "sqlalchemy-serializer", specifier = ">=1.4.22" },
+    { name = "types-flask-cors", specifier = ">=5.0.0.20240902" },
     { name = "waitress", specifier = ">=3.0.2" },
 ]
 
@@ -445,6 +447,18 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/3f/2f/61c827f8caac52d7ca72a36a6994471c0c933c8137b52bd3692ad721d42f/sqlalchemy_serializer-1.4.22.tar.gz", hash = "sha256:866fac5fb62cf92793470d8b93e4db47fbfffa76d7b4ef7d69906a9000c026cb", size = 14806 }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/da/e1/7510fdce2add0aee2337d189ca8da9468d44f9679c184d4496189a87f4c7/sqlalchemy_serializer-1.4.22-py3-none-any.whl", hash = "sha256:4f140b711976e0a31a8c52d633ea4ba2a624611cd6573cb72b4985316547797b", size = 19558 },
+]
+
+[[package]]
+name = "types-flask-cors"
+version = "5.0.0.20240902"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "flask" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/dc/04/166bb81dcf1a0a4630a00ff2237cc789968c85836ea179496f163cce0678/types-Flask-Cors-5.0.0.20240902.tar.gz", hash = "sha256:8921b273bf7cd9636df136b66408efcfa6338a935e5c8f53f5eff1cee03f3394", size = 5159 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/66/ed/3c34a60873fe63fa56b29f589c395618b20a3daa90e91faf770152c22a77/types_Flask_Cors-5.0.0.20240902-py3-none-any.whl", hash = "sha256:595e5f36056cd128ab905832e055f2e5d116fbdc685356eea4490bc77df82137", size = 5303 },
 ]
 
 [[package]]
