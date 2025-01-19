@@ -1,7 +1,4 @@
-from datetime import datetime
 import sys
-
-current_date = datetime.now().strftime("%Y%m%d")
 
 # 输入版本号
 # print(version_num)
@@ -11,7 +8,7 @@ version_string = sys.argv[1:][0]
 if version_string.startswith("refs/tags/"):
     version_string = version_string[10:]
 
-version_num = version_string[1:].split(".") + [current_date]
+version_num = version_string[1:].split(".")
 
 versionNum = (
     version_num[0] + "," + version_num[1] + "," + version_num[2] + "," + version_num[3]
