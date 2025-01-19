@@ -1,8 +1,6 @@
 name: Release
 on:
   push:
-    branches:
-      - main
     tags:
       - "v*"
 jobs:
@@ -13,9 +11,6 @@ jobs:
       - name: Check out Git repository
         uses: actions/checkout@v3
 
-      - name: Get version
-        id: get_version
-        run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
 
       - name: Install Python 3.12
         uses: actions/setup-python@v4
@@ -24,7 +19,7 @@ jobs:
 
       - name: Update version.txt versionNum
         run: |
-          python .\resources\versionInfo.py ${{ steps.get_version.outputs.VERSION }}
+          python .\resources\versionInfo.py ${{ github.ref }}
 
       - name: Build
         run: |
