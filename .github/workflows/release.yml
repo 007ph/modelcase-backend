@@ -13,9 +13,9 @@ jobs:
       - name: Check out Git repository
         uses: actions/checkout@v3
 
-      - name: Get the tag version
-        id: get_tag
-        run: echo "VERSION_NUM=${GITHUB_REF#refs/tags/v}" >> $GITHUB_ENV
+      - name: Get version
+        id: get_version
+        run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
 
       - name: Install Python 3.12
         uses: actions/setup-python@v4
@@ -24,7 +24,7 @@ jobs:
 
       - name: Update version.txt versionNum
         run: |
-          python .\resources\versionInfo.py ${{ env.VERSION_NUM }}
+          python .\resources\versionInfo.py ${{ steps.get_version.outputs.VERSION }}
 
       - name: Build
         run: |
