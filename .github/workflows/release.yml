@@ -22,7 +22,7 @@ jobs:
 
     - name: Update version.txt versionNum
       run: |
-        python .\resources\versionInfo.py ${ env.VERSION_NUM }}
+        python .\resources\versionInfo.py ${{ env.VERSION_NUM }}
 
     - name: Build
       run: |
