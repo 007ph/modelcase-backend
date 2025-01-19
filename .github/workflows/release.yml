@@ -11,26 +11,29 @@ jobs:
       - name: Check out Git repository
         uses: actions/checkout@v3
 
-
       - name: Install Python 3.12
         uses: actions/setup-python@v4
         with:
           python-version: 3.12
 
-      - name: Install Python 3.12
+      - name: Install uv
         run: |
-            pip install uv
-      
+          pip install uv
+
       - name: Update version.txt versionNum
         run: |
           python .\resources\versionInfo.py ${{ github.ref }}
 
       - name: Build
         run: |
-          uv run pyinstaller .\build.spec  
+          uv run pyinstaller .\build.spec
 
-      - name: Upload .exe files from dist
-        uses: actions/upload-artifact@v3
+      - name: Release
+        uses: softprops/action-gh-release@v2
         with:
-          path: dist/*.exe # 匹配 dist 目录下所有 .exe 文件
+            token: ${{ secrets.ACCESS_TOKEN }}
+            files: |
+              ./dist/*.exe
+              
+
 
